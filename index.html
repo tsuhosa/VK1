@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#ff75ae">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>PokéTea Shop</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+<header class="topbar">
+  <div><div class="brand">🧋 PokéTea Shop</div><div id="clock">10:00</div></div>
+  <div class="wallet">💰 <span id="money">500</span></div>
+</header>
+
+<main>
+<section id="shopScreen" class="screen active">
+  <div class="hero-card">
+    <div class="shop-art">🧋</div>
+    <div class="grow"><h1>Tiệm Trà Sữa Lá Non</h1><p id="dayText">Ngày 1 • Quán đóng</p></div>
+    <div class="rating">⭐ <b id="repText">0</b></div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat"><span>⭐ Chủ quán</span><b id="levelText">Lv.1</b></div>
+    <div class="stat"><span>EXP</span><b id="expText">0/100</b></div>
+    <div class="stat"><span>📦 Kho</span><b id="stockText">0/40</b></div>
+    <div class="stat"><span>👥 Đang chờ</span><b id="queueText">0/3</b></div>
+  </div>
+
+  <div id="prepBox" class="prep-box">
+    <div class="section-title">📦 Chuẩn bị trước khi mở cửa</div>
+    <p class="muted">Mua nguyên liệu ở tab <b>Kho</b>. Khi đủ hàng, bấm mở cửa. Quán hoạt động từ <b>10:00 đến 22:00</b>.</p>
+    <div class="prep-actions"><button class="primary" onclick="openShop()">🟢 Mở cửa 10:00</button><button onclick="buyAllBasic()">🛒 Mua nhanh nguyên liệu</button></div>
+  </div>
+
+  <div id="shiftBox" class="hidden">
+    <div class="section-title">👥 Khách đang chờ</div>
+    <div id="customers"></div>
+    <div class="section-title">🧋 Đơn đang phục vụ</div>
+    <div id="orderArea"></div>
+    <div class="section-title">⚡ Sự kiện</div>
+    <div id="eventArea"></div>
+  </div>
+
+  <div class="section-title">📖 Nhiệm vụ cốt truyện</div>
+  <div id="storyQuest"></div>
+</section>
+
+<section id="inventoryScreen" class="screen">
+  <div class="page-title">📦 Kho & nguyên liệu</div>
+  <div class="save-card"><b>Chuẩn bị nguyên liệu</b><p class="muted">Mỗi món cần đúng bộ nguyên liệu. Mua trước khi mở cửa để không bị thiếu hàng giữa ca.</p></div>
+  <div id="ingredients"></div>
+</section>
+
+<section id="recipeScreen" class="screen">
+  <div class="page-title">📖 Công thức pha chế</div>
+  <div class="save-card"><b>Chọn nguyên liệu</b><p class="muted">Khi khách gọi món, bạn phải tự chọn nguyên liệu. Chọn sai có thể tạo ra món lỗi và mất thời gian.</p></div>
+  <div id="recipes"></div>
+</section>
+
+<section id="staffScreen" class="screen">
+  <div class="page-title">🐾 Pokémon nhân viên</div>
+  <p class="muted">Pokémon có chỉ số, cấp độ và skill riêng. Skill có thể tự kích hoạt khi đạt điều kiện.</p>
+  <div id="staffList"></div>
+  <div class="section-title">🎲 Gacha nhân viên</div>
+  <div class="save-card"><p>Chiêu mộ Pokémon mới. Mỗi lượt có xác suất Rare/Epic.</p><button class="primary" onclick="gacha()">🎟️ Gacha 250💰</button><div id="gachaResult"></div></div>
+</section>
+
+<section id="upgradeScreen" class="screen">
+  <div class="page-title">🏪 Quán & trang trí</div>
+  <div id="upgradeList"></div>
+  <div class="section-title">🎉 Sự kiện hôm nay</div>
+  <div id="eventList"></div>
+</section>
+
+<section id="summaryScreen" class="screen">
+  <div class="page-title">📊 Sổ quán</div>
+  <div id="summary"></div>
+</section>
+</main>
+
+<nav class="bottom-nav">
+<button class="nav-btn active" onclick="showScreen('shopScreen',this)">🏪<span>Quán</span></button>
+<button class="nav-btn" onclick="showScreen('inventoryScreen',this)">📦<span>Kho</span></button>
+<button class="nav-btn" onclick="showScreen('recipeScreen',this)">📖<span>Công thức</span></button>
+<button class="nav-btn" onclick="showScreen('staffScreen',this)">🐾<span>Pokémon</span></button>
+<button class="nav-btn" onclick="showScreen('upgradeScreen',this)">⬆️<span>Nâng cấp</span></button>
+<button class="nav-btn" onclick="showScreen('summaryScreen',this)">📊<span>Sổ quán</span></button>
+</nav>
+</div>
+<div id="toast"></div>
+<script src="game.js"></script>
+<script>if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));</script>
+</body>
+</html>
